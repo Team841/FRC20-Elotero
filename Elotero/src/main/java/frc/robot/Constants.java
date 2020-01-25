@@ -16,4 +16,16 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+	// STRUCTURE OF THE CONSTANTS CONTAINED IN THIS DOCUMENT
+
+    	// CONSTANTS FOR THE DRIVETRAIN
+	public static final double throttleDeadband = 0.02; 
+	public static final double wheelDeadband = 0.02;	
+	public static final double sensitivityHigh = 0.85;	
+	public static final double sensitivityLow = 0.75;
+	public static final double centervalue = 140;
+	public static final double tolerance = 10;
+	public static final int currentlimit = 40;
+
 }
