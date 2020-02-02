@@ -9,11 +9,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.subsystems.DriveTrain;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -24,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems are defined here...
   private final DriveTrain m_driveTrain = new DriveTrain();
+  private final Shooter m_flywheel = new Shooter();
 
   // OI defined here
 private final Joystick m_driverCtrl = new Joystick(Constants.OI.driverPort);
@@ -38,7 +41,7 @@ private final Joystick m_driverCtrl = new Joystick(Constants.OI.driverPort);
     configureButtonBindings();
     // Assign default commands (Formerly located in Subsystems)
     m_driveTrain.setDefaultCommand(
-      new RunCommand(() -> m_driveTrain.cheesyDrive(m_driverCtrl))
+      new RunCommand(() -> m_driveTrain.Drive(m_driverCtrl), m_driveTrain)
       );
     //
   }
@@ -54,6 +57,11 @@ private final Joystick m_driverCtrl = new Joystick(Constants.OI.driverPort);
     final JoystickButton qT = new JoystickButton(m_driverCtrl, Constants.OI.quickTurn);
     qT.whenPressed(new InstantCommand(m_driveTrain::setQuickTurn, m_driveTrain));
     qT.whenReleased(new InstantCommand(m_driveTrain::resetQuickTurn, m_driveTrain));
+//Create a shoot (sht) button and assign commands on press & release
+    final JoystickButton flywheel = new JoystickButton(m_driverCtrl, Constants.OI.flywheel);
+    flywheel.whenPressed(new InstantCommand(m_flywheel::startShot, m_flywheel));
+    flywheel.whenReleased(new InstantCommand(m_flywheel::stopShot, m_flywheel));
+
   }
 
 
