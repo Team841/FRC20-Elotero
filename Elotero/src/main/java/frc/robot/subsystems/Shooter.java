@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -31,6 +33,15 @@ private final WPI_TalonFX shootLeft = new WPI_TalonFX(Constants.Shoot.CANidShoot
     shootLeft.follow(shootRight);
     shootLeft.setInverted(true);
 
+    shootRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,Constants.kPIDLoopIdx,Constants.kTimeoutMs);
+    shootLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,Constants.kPIDLoopIdx,Constants.kTimeoutMs);
+
+		/* Config the Velocity closed loop gains in slot0 */
+		shootRight.config_kF(Constants.kPIDLoopIdx, Constants.kF, Constants.kTimeoutMs);
+		shootRight.config_kP(Constants.kPIDLoopIdx, Constants.kP, Constants.kTimeoutMs);
+		shootLeft.config_kF(Constants.kPIDLoopIdx, Constants.kF, Constants.kTimeoutMs);
+		shootLeft.config_kP(Constants.kPIDLoopIdx, Constants.kP, Constants.kTimeoutMs);
+
 
 
   }
@@ -46,4 +57,8 @@ private final WPI_TalonFX shootLeft = new WPI_TalonFX(Constants.Shoot.CANidShoot
   public void startShot() {
     shootRight.set(0.9);
   }
+  public void startVeloShot() {
+    shootRight.set(ControlMode.Velocity, 19800);
+  }
+
 }

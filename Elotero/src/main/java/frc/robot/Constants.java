@@ -21,6 +21,7 @@ public final class Constants {
         public static final int driverPort = 0; //controller port map
         public static final int quickTurn = 6; //button map
 		public static final int flywheel = 2;  //button map shooter 
+		public static final int Vflywheel = 3; //velocityshot button map
     }
 
     public static final class Drive{
@@ -52,4 +53,9 @@ public final class Constants {
 
 //        public static final double flyRPM = 0.9; not used
     }
+
+	public static final int kPIDLoopIdx = 0;
+    public static final int kTimeoutMs = 30;
+    public final static double kP = 0.25;
+    public final static double kF = .1;
 }
