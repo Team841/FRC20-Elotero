@@ -46,7 +46,8 @@ public void stopShot(){
 }
 public void startShot(){
  
-  shootRightTalonFX.set(0.1);
+  shootRightTalonFX.set(Constants.Shoot.shotPower);
+
 
 }
 
