@@ -20,6 +20,7 @@ public final class Constants {
     public static final class OI{
         public static final int driverPort = 0; //controller port map
         public static final int quickTurn = 6; //button map
+		public static final int flywheel = 8;//button map
     }
 
     public static final class Drive{
@@ -43,5 +44,10 @@ public final class Constants {
         public static final double centervalue = 140;
         public static final double tolerance = 10;
 
+    }
+
+	public static final class Shoot{
+        public static final int CANidShootLeft = 6;
+        public static final int CANidShootRight = 5;
     }
 }
