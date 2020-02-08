@@ -38,7 +38,7 @@ private final Joystick m_driverCtrl = new Joystick(Constants.OI.driverPort);
     configureButtonBindings();
     // Assign default commands (Formerly located in Subsystems)
     m_driveTrain.setDefaultCommand(
-      new RunCommand(() -> m_driveTrain.cheesyDrive(m_driverCtrl),m_driveTrain)
+      new RunCommand(() -> m_driveTrain.Drive(m_driverCtrl),m_driveTrain)
       );
     //
   }
