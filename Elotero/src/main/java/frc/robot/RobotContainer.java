@@ -27,7 +27,7 @@ public class RobotContainer {
   private final DriveTrain m_driveTrain = new DriveTrain();
   private final Shooter m_flywheel = new Shooter();
   // OI defined here
-private final Joystick m_driverCtrl = new Joystick(Constants.OI.driverPort);
+private final Joystick m_driverCtrl = new Joystick(C.OI.driverPort);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -52,12 +52,12 @@ private final Joystick m_driverCtrl = new Joystick(Constants.OI.driverPort);
    */
   private void configureButtonBindings() {
 //Create a quickturn (qt) button and assign commands on press & release
-    final JoystickButton qT = new JoystickButton(m_driverCtrl, Constants.OI.quickTurn);
+    final JoystickButton qT = new JoystickButton(m_driverCtrl, C.OI.quickTurn);
     qT.whenPressed(new InstantCommand(m_driveTrain::setQuickTurn, m_driveTrain));
     qT.whenReleased(new InstantCommand(m_driveTrain::resetQuickTurn, m_driveTrain));
 
 
-    final JoystickButton flywheel = new JoystickButton(m_driverCtrl, Constants.OI.flywheel);
+    final JoystickButton flywheel = new JoystickButton(m_driverCtrl, C.OI.flywheel);
     flywheel.whenPressed(new InstantCommand(m_flywheel::startShot, m_flywheel));
     flywheel.whenReleased(new InstantCommand(m_flywheel::stopShot, m_flywheel));
   }
