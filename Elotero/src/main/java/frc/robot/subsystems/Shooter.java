@@ -55,7 +55,7 @@ private final WPI_TalonFX shootLeft = new WPI_TalonFX(Constants.Shoot.CANidShoot
     shootRight.set(0);
   }
   public void startShot() {
-    shootRight.set(0.9);
+    shootRight.set(Constants.Shoot.shotPower);
   }
   public void startVeloShot() {
     shootRight.set(ControlMode.Velocity, 19800);

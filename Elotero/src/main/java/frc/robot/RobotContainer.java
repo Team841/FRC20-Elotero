@@ -60,7 +60,10 @@ private final Joystick m_driverCtrl = new Joystick(Constants.OI.driverPort);
 //Create a shoot (sht) button and assign commands on press & release
     final JoystickButton flywheel = new JoystickButton(m_driverCtrl, Constants.OI.flywheel);
     flywheel.whenPressed(new InstantCommand(m_flywheel::startShot, m_flywheel));
+
     flywheel.whenReleased(new InstantCommand(m_flywheel::stopShot, m_flywheel));
+
+
 //Create a Velocity shoot (Vsht) button and assign commands on press & release
 final JoystickButton Vflywheel = new JoystickButton(m_driverCtrl, Constants.OI.Vflywheel);
 Vflywheel.whenPressed(new InstantCommand(m_flywheel::startVeloShot, m_flywheel));

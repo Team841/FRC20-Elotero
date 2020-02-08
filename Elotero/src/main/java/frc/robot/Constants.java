@@ -50,7 +50,7 @@ public final class Constants {
     public static final class Shoot{
         public static final int CANidShootLeft = 6;
         public static final int CANidShootRight = 5;
-
+        public static final double shotPower = 0.9;
 //        public static final double flyRPM = 0.9; not used
     }
 
