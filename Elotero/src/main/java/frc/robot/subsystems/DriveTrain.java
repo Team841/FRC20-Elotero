@@ -243,10 +243,10 @@ right2.follow(right1);
      */
     public void SetLeftRight(double LPower, double RPower) {
 
-        right1.set(RPower * 1);
+        right1.set(RPower * -1); //inverted for 2020 flipped gearbox
         //right2.set(RPower);
         //right3.set(RPower);
-        left1.set(LPower * 1);
+        left1.set(LPower * -1);
         //left2.set(LPower);
         //left3.set(LPower);
 
