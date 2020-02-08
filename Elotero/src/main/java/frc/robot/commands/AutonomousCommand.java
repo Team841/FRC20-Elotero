@@ -47,7 +47,7 @@ public class AutonomousCommand extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return true; //updated so Autonomous Command immediately exits
     }
 
     // Called once after isFinished returns true
