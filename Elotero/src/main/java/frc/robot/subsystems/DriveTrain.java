@@ -12,10 +12,10 @@ import frc.robot.C;
  */
 public class DriveTrain extends SubsystemBase {
 
-private final WPI_TalonFX left1 = new WPI_TalonFX(C.Drive.CANidLeft1);
-private final WPI_TalonFX left2 = new WPI_TalonFX(C.Drive.CANidLeft2);
-private final WPI_TalonFX right1 = new WPI_TalonFX(C.Drive.CANidRight1);
-private final WPI_TalonFX right2 = new WPI_TalonFX(C.Drive.CANidRight2);
+private final WPI_TalonFX left1 = new WPI_TalonFX(C.CANid.driveLeft1);
+private final WPI_TalonFX left2 = new WPI_TalonFX(C.CANid.driveLeft2);
+private final WPI_TalonFX right1 = new WPI_TalonFX(C.CANid.driveRight1);
+private final WPI_TalonFX right2 = new WPI_TalonFX(C.CANid.driveRight2);
 
 //Constructor creates & sets up a new DriveTrain
 public DriveTrain() {

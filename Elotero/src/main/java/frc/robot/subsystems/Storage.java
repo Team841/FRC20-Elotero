@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.*;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -15,16 +14,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.C;
 
 public class Storage extends SubsystemBase {
-  private final CANSparkMax motor1 = new CANSparkMax(C.Storage.CANidStorage, MotorType.kBrushless);
-
+  private final CANSparkMax Storemotor = new CANSparkMax(C.CANid.storage, MotorType.kBrushless);
+  private final CANSparkMax Indexmotor = new CANSparkMax(C.CANid.index, MotorType.kBrushless);
   /**
    * Creates a new ExampleSubsystem.
    */
   public Storage() {
 
-//
+Storemotor.restoreFactoryDefaults();
+Indexmotor.restoreFactoryDefaults();
 
+Storemotor.setSmartCurrentLimit(40, 20); //Set current limits to be 40A while spinning & 20A while stopped
+Indexmotor.setSmartCurrentLimit(40, 20); //Set current limits to be 40A while spinning & 20A while stopped
 
+Storemotor.burnFlash();
+Indexmotor.burnFlash();
 
   }
 
@@ -33,8 +37,8 @@ public class Storage extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-public void stopSfore(){
-  motor1.set(0);
+public void stopStore(){
+  Storemotor.set(0);
 
 
 }
@@ -44,7 +48,7 @@ public void stopSfore(){
 
   public void startStore() {
  
-  motor1.set(C.Storage.Store);
+  Storemotor.set(C.Storage.StorePower);
 
 
 }

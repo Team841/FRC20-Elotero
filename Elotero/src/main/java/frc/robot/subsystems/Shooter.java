@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.C;
 
 public class Shooter extends SubsystemBase {
-  private final WPI_TalonFX shootRightTalonFX = new WPI_TalonFX(C.Shoot.CANidShootRight);
-  private final WPI_TalonFX shootLeftTalonFX = new WPI_TalonFX(C.Shoot.CANidShootLeft);
+  private final WPI_TalonFX shootRightTalonFX = new WPI_TalonFX(C.CANid.shootRight);
+  private final WPI_TalonFX shootLeftTalonFX = new WPI_TalonFX(C.CANid.shootLeft);
   /**
    * Creates a new ExampleSubsystem.
    */
