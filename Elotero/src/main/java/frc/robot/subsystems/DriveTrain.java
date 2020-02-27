@@ -163,8 +163,8 @@ private boolean isQuickTurn = false;
             }
         }
         rightPwm = leftPwm = linearPower;
-        leftPwm += angularPower;
-        rightPwm -= angularPower;
+        leftPwm -= angularPower; //Flipped in 2020 for flipped gearboxes
+        rightPwm += angularPower; //Flipped in 2020 for flipped gearboxes
         if (leftPwm > 1.0) {
             rightPwm -= overPower * (leftPwm - 1.0);
             leftPwm = 1.0;

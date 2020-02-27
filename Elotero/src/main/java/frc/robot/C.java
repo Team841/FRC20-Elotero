@@ -26,10 +26,10 @@ public final class C {
     public static final class Drive{
         
         //Physical setup of the drive
-        public static final int CANidRight1 = 1;
-        public static final int CANidRight2 = 2; 
-        public static final int CANidLeft1 = 3;
-        public static final int CANidLeft2 = 4;
+        public static final int CANidRight1 = 3;
+        public static final int CANidRight2 = 4; 
+        public static final int CANidLeft1 = 1;
+        public static final int CANidLeft2 = 2;
 
         //Current limit setup based on legacy SRX interface //TODO: Update current limit for FX
 //      public static final double contCurrentLimit = 45; //continuous current limit (45A default) 
@@ -49,6 +49,13 @@ public final class C {
 	public static final class Shoot{
         public static final int CANidShootLeft = 6;
         public static final int CANidShootRight = 5;
-		public static final double shotPower = 0.1;
+		public static final double shotPower = 0.85;
+    }
+
+	
+	public static final class Storage{
+        public static int CANidStorage = 1;
+        public static final double Store = 0.95;
+        
     }
 }
