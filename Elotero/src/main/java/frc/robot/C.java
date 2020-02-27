@@ -15,7 +15,7 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {
+public final class C {
 
     public static final class OI{
         public static final int driverPort = 0; //controller port map
@@ -23,13 +23,20 @@ public final class Constants {
 		public static final int flywheel = 8;//button map
     }
 
+    public static final class CANid{
+        public static final int driveRight1 = 3;
+        public static final int driveRight2 = 4; 
+        public static final int driveLeft1 = 1;
+        public static final int driveLeft2 = 2;
+        public static final int shootLeft = 6;
+        public static final int shootRight = 5;
+        public static final int storage = 1; //SparkMAX needs to get programmed to match this
+        public static final int index = 8; //SparkMAX needs to get programmed to match this
+    }
+
     public static final class Drive{
         
         //Physical setup of the drive
-        public static final int CANidRight1 = 1;
-        public static final int CANidRight2 = 2; 
-        public static final int CANidLeft1 = 3;
-        public static final int CANidLeft2 = 4;
 
         //Current limit setup based on legacy SRX interface //TODO: Update current limit for FX
 //      public static final double contCurrentLimit = 45; //continuous current limit (45A default) 
@@ -47,8 +54,12 @@ public final class Constants {
     }
 
 	public static final class Shoot{
-        public static final int CANidShootLeft = 6;
-        public static final int CANidShootRight = 5;
-		public static final double shotPower = 0.1;
+		public static final double shotPower = 0.85;
+    }
+
+	
+	public static final class Storage{
+        public static final double StorePower = 0.95;
+        
     }
 }

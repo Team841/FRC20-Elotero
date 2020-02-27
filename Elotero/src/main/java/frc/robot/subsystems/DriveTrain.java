@@ -6,16 +6,16 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import frc.robot.Constants;
+import frc.robot.C;
 /**
  *
  */
 public class DriveTrain extends SubsystemBase {
 
-private final WPI_TalonFX left1 = new WPI_TalonFX(Constants.Drive.CANidLeft1);
-private final WPI_TalonFX left2 = new WPI_TalonFX(Constants.Drive.CANidLeft2);
-private final WPI_TalonFX right1 = new WPI_TalonFX(Constants.Drive.CANidRight1);
-private final WPI_TalonFX right2 = new WPI_TalonFX(Constants.Drive.CANidRight2);
+private final WPI_TalonFX left1 = new WPI_TalonFX(C.CANid.driveLeft1);
+private final WPI_TalonFX left2 = new WPI_TalonFX(C.CANid.driveLeft2);
+private final WPI_TalonFX right1 = new WPI_TalonFX(C.CANid.driveRight1);
+private final WPI_TalonFX right2 = new WPI_TalonFX(C.CANid.driveRight2);
 
 //Constructor creates & sets up a new DriveTrain
 public DriveTrain() {
@@ -71,12 +71,12 @@ private boolean isQuickTurn = false;
 
 
         double wheelNonLinearity;
-        double wheel = handleDeadband(getWheel(stick), Constants.Drive.wheelDeadband); // double
+        double wheel = handleDeadband(getWheel(stick), C.Drive.wheelDeadband); // double
                                                                          // wheel
                                                                          // =
                                                                          // handleDeadband(controlBoard.rightStick.getX(),
                                                                          // wheelDeadband);
-        double throttle = -handleDeadband(getThrottle(stick), Constants.Drive.throttleDeadband);
+        double throttle = -handleDeadband(getThrottle(stick), C.Drive.throttleDeadband);
         double negInertia = wheel - oldWheel;
         /*
          * if(getAverageSpeed()> 2000){ SetHighGear(); } else if (getAverageSpeed() <
@@ -107,8 +107,8 @@ private boolean isQuickTurn = false;
 
         if (isHighGear) {
             negInertiaScalar = 5.0;
-            sensitivity = Constants.Drive.sensitivityHigh; // sensitivity =
-                                             // Constants.sensitivityHigh.getDouble();
+            sensitivity = C.Drive.sensitivityHigh; // sensitivity =
+                                             // C.sensitivityHigh.getDouble();
         } else {
             if (wheel * negInertia > 0) {
                 negInertiaScalar = 2.5;
@@ -119,8 +119,8 @@ private boolean isQuickTurn = false;
                     negInertiaScalar = 3.0;
                 }
             }
-            sensitivity = Constants.Drive.sensitivityLow; // sensitivity =
-                                            // Constants.sensitivityLow.getDouble();
+            sensitivity = C.Drive.sensitivityLow; // sensitivity =
+                                            // C.sensitivityLow.getDouble();
             if (Math.abs(throttle) > 0.1) {
                 // sensitivity = 1.0 - (1.0 - sensitivity) / Math.abs(throttle);
             }
@@ -163,8 +163,8 @@ private boolean isQuickTurn = false;
             }
         }
         rightPwm = leftPwm = linearPower;
-        leftPwm += angularPower;
-        rightPwm -= angularPower;
+        leftPwm -= angularPower; //Flipped in 2020 for flipped gearboxes
+        rightPwm += angularPower; //Flipped in 2020 for flipped gearboxes
         if (leftPwm > 1.0) {
             rightPwm -= overPower * (leftPwm - 1.0);
             leftPwm = 1.0;
