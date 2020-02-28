@@ -9,10 +9,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Shooter;
+import frc.robot.C.*;
+import frc.robot.subsystems.*;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Storage;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -26,6 +30,9 @@ public class RobotContainer {
   // The robot's subsystems are defined here...
   private final DriveTrain m_driveTrain = new DriveTrain();
   private final Shooter m_flywheel = new Shooter();
+  private final Storage m_storage = new Storage();
+  private final Indexer m_indexer = new Indexer();
+  private final Intake m_intake = new Intake();
   // OI defined here
 private final Joystick m_driverCtrl = new Joystick(C.OI.driverPort);
 
@@ -60,7 +67,18 @@ private final Joystick m_driverCtrl = new Joystick(C.OI.driverPort);
     final JoystickButton flywheel = new JoystickButton(m_driverCtrl, C.OI.flywheel);
     flywheel.whenPressed(new InstantCommand(m_flywheel::startShot, m_flywheel));
     flywheel.whenReleased(new InstantCommand(m_flywheel::stopShot, m_flywheel));
-  }
+
+    final JoystickButton openLoopStorage = new JoystickButton(m_driverCtrl, C.OI.openLoopStorage);
+      openLoopStorage.whenPressed(new ParallelCommandGroup(new InstantCommand(m_storage::startStore, m_storage), new InstantCommand(m_indexer::startIndex, m_indexer)))
+//      openLoopStorage.whenReleased(new InstantCommand(m_storage::stopStore, m_storage));
+      .whenReleased(new ParallelCommandGroup(new InstantCommand(m_storage::stopStore, m_storage), new InstantCommand(m_indexer::stopIndex, m_indexer)));
+
+    final JoystickButton openLoopIntake = new JoystickButton(m_driverCtrl, C.OI.kA);
+    openLoopIntake.whenPressed(new InstantCommand(m_intake::startTake, m_intake));
+    openLoopIntake.whenReleased(new InstantCommand(m_intake::stopTake, m_intake));
+
+
+  } 
   
 
 

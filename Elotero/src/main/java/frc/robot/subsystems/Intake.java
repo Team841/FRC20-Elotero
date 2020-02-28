@@ -13,16 +13,16 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.C;
 
-public class Storage extends SubsystemBase {
-  private final CANSparkMax Storemotor = new CANSparkMax(C.CANid.storage, MotorType.kBrushless);
+public class Intake extends SubsystemBase {
+  private final CANSparkMax motor = new CANSparkMax(C.CANid.intake, MotorType.kBrushless);
   /**
    * Creates a new ExampleSubsystem.
    */
-  public Storage() {
+  public Intake() {
 
-Storemotor.restoreFactoryDefaults();
-Storemotor.setSmartCurrentLimit(40, 20); //Set current limits to be 40A while spinning & 20A while stopped
-Storemotor.burnFlash();
+motor.restoreFactoryDefaults();
+motor.setSmartCurrentLimit(40, 20); //Set current limits to be 40A while spinning & 20A while stopped
+motor.burnFlash();
 
   }
 
@@ -31,8 +31,8 @@ Storemotor.burnFlash();
     // This method will be called once per scheduler run
   }
 
-public void stopStore(){
-  Storemotor.set(0);
+public void stopTake(){
+  motor.set(0);
 
 
 }
@@ -40,9 +40,9 @@ public void stopStore(){
   //private static void set(double store) {
  // }
 
-  public void startStore() {
+  public void startTake() {
  
-  Storemotor.set(C.Storage.storePower);
+  motor.set(C.Intake.takePower);
 
 
 }

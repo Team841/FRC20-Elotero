@@ -20,7 +20,9 @@ public final class C {
     public static final class OI{
         public static final int driverPort = 0; //controller port map
         public static final int quickTurn = 6; //button map
-		public static final int flywheel = 8;//button map
+        public static final int flywheel = 8;//button map
+        public static final int openLoopStorage = 4; //button map Storage
+        public static final int kA = 2; //button A??
     }
 
     public static final class CANid{
@@ -30,8 +32,9 @@ public final class C {
         public static final int driveLeft2 = 2;
         public static final int shootLeft = 6;
         public static final int shootRight = 5;
-        public static final int storage = 1; //SparkMAX needs to get programmed to match this
-        public static final int index = 8; //SparkMAX needs to get programmed to match this
+        public static final int storage = 11; 
+        public static final int index = 12; 
+        public static final int intake = 10;
     }
 
     public static final class Drive{
@@ -54,12 +57,21 @@ public final class C {
     }
 
 	public static final class Shoot{
-		public static final double shotPower = 0.85;
+        public static final double shotPower = 0.70;
+        public static final double maxSpeed = 18000; //Reported in native units of the Talon FX (clicks per 100ms)
     }
 
 	
 	public static final class Storage{
-        public static final double StorePower = 0.95;
+        public static final double storePower = 0.9;
         
+    }
+
+    public static final class Indexer{
+        public static final double indexPower = -0.9;
+    }
+
+    public static final class Intake{
+        public static final double takePower = 0.7;
     }
 }
