@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.C;
 
@@ -29,7 +30,8 @@ public class Shooter extends SubsystemBase {
     shootLeftTalonFX.follow(shootRightTalonFX);
     shootLeftTalonFX.setInverted(true);
 
-
+    
+    SmartDashboard.putNumber("ShotPower",C.Shoot.shotPower);
 
 
   }
@@ -46,7 +48,7 @@ public void stopShot(){
 }
 public void startShot(){
  
-  shootRightTalonFX.set(C.Shoot.shotPower);
+  shootRightTalonFX.set(SmartDashboard.getNumber("ShotPower", C.Shoot.shotPower));
 
 
 }

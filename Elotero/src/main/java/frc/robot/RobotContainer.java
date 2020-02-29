@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import edu.wpi.first.wpilibj.smartdashboard.*;
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -28,12 +28,13 @@ public class RobotContainer {
   private final Shooter m_flywheel = new Shooter();
   // OI defined here
 private final Joystick m_driverCtrl = new Joystick(C.OI.driverPort);
-
+private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Put stuff on Shuffleboard/SmartDashboard
+
       //stuff
     // Configure the button bindings
     configureButtonBindings();
@@ -57,14 +58,14 @@ private final Joystick m_driverCtrl = new Joystick(C.OI.driverPort);
     qT.whenReleased(new InstantCommand(m_driveTrain::resetQuickTurn, m_driveTrain));
 
 
-    final JoystickButton flywheel = new JoystickButton(m_driverCtrl, C.OI.flywheel);
+    final JoystickButton flywheel = new JoystickButton(m_codriverCtrl, C.OI.flywheel);
     flywheel.whenPressed(new InstantCommand(m_flywheel::startShot, m_flywheel));
     flywheel.whenReleased(new InstantCommand(m_flywheel::stopShot, m_flywheel));
   }
   
 
 
-  /**
+  /**   
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
