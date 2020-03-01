@@ -30,8 +30,9 @@ public final class C {
         public static final int driveLeft2 = 2;
         public static final int shootLeft = 6;
         public static final int shootRight = 5;
-        public static final int storage = 1; //SparkMAX needs to get programmed to match this
-        public static final int index = 8; //SparkMAX needs to get programmed to match this
+        public static final int storage = 12; //SparkMAX needs to get programmed to match this
+        public static final int index = 11; //SparkMAX needs to get programmed to match this
+        public static final int intake = 10;
     }
 
     public static final class Drive{
@@ -54,7 +55,15 @@ public final class C {
     }
 
 	public static final class Shoot{
-		public static final double shotPower = 0.85;
+        public static final double shotPower = 0.85;
+        public static final double velocitySetPoint = 12000;
+        public static final double kP = 0.01;
+        public static final double kI = 0;
+        public static final double kD = 5;
+        public static final double kF = 0.045;
+        public static final int kPIDLoopIdx = 0;
+        public static final int kTimeoutMs = 30;
+
     }
 
 	
