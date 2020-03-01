@@ -67,8 +67,13 @@ public final class C {
     }
 
 	
-	public static final class Storage{
-        public static final double StorePower = 0.95;
+	public static final class Storaged{
+        public static final double StorePower = 0.6;
+        public static final int SensorChannel = 9;
     
+    }
+    public static final class Index{
+        public static final double IndexPower = 0.3;
+        public static final int SensorChannel = 8;
     }
 }

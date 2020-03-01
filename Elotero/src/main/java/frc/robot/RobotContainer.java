@@ -9,8 +9,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.C.*;
+import frc.robot.commands.AutoIndex;
+import frc.robot.commands.AutoStorage;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Storage;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -26,6 +31,9 @@ public class RobotContainer {
   // The robot's subsystems are defined here...
   private final DriveTrain m_driveTrain = new DriveTrain();
   private final Shooter m_flywheel = new Shooter();
+  private final Indexer m_indexer = new Indexer();
+  private final Storage m_storage = new Storage();
+
   // OI defined here
 private final Joystick m_driverCtrl = new Joystick(C.OI.driverPort);
 private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
@@ -42,6 +50,11 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
     m_driveTrain.setDefaultCommand(
       new RunCommand(() -> m_driveTrain.Drive(m_driverCtrl),m_driveTrain)
       );
+    
+    //m_storage.setDefaultCommand(
+      //new RunCommand(()-> m_driveTrain.Drive(m_driveCtrl),m_driveTrain));
+    m_storage.setDefaultCommand(  new AutoStorage(m_storage) );
+    m_indexer.setDefaultCommand(new AutoIndex(m_indexer));
     //
   }
 
@@ -66,7 +79,7 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
 
 
   /**   
-   * Use this to pass the autonomous command to the main {@link Robot} class.
+     * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
