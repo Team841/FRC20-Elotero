@@ -74,7 +74,10 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
     final JoystickButton flywheel = new JoystickButton(m_codriverCtrl, C.OI.flywheel);
     flywheel.whenPressed(new InstantCommand(m_flywheel::startShot, m_flywheel));
     flywheel.whenReleased(new InstantCommand(m_flywheel::stopShot, m_flywheel));
-  }
+
+    final JoystickButton turnTarget = new JoystickButton(m_codriverCtrl, 1);
+    turnTarget.whileHeld(new InstantCommand(m_driveTrain::TurnToTarget, m_driveTrain));
+    }
   
 
 

@@ -2,7 +2,11 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
@@ -16,7 +20,9 @@ private final WPI_TalonFX left1 = new WPI_TalonFX(C.CANid.driveLeft1);
 private final WPI_TalonFX left2 = new WPI_TalonFX(C.CANid.driveLeft2);
 private final WPI_TalonFX right1 = new WPI_TalonFX(C.CANid.driveRight1);
 private final WPI_TalonFX right2 = new WPI_TalonFX(C.CANid.driveRight2);
+private double x = 0;
 
+private double v = 0;
 //Constructor creates & sets up a new DriveTrain
 public DriveTrain() {
     //Controller housekeeping in the constructor
@@ -41,7 +47,61 @@ public DriveTrain() {
     public void periodic() {
         // Put code here to be run every loop: vision updates, odometry updates, etc
         // Normal drive code doesn't go here, drive is a method below
+        NetworkTable table; 
 
+        NetworkTableEntry tx;
+    
+        //NetworkTableEntry ty; 
+    
+       // NetworkTableEntry ta; 
+    
+        NetworkTableEntry tv; 
+    
+            
+    
+            // Update values of the table
+    
+            table = NetworkTableInstance.getDefault().getTable("limelight");
+    
+            tx = table.getEntry("tx");
+    
+            tv = table.getEntry("tv");
+    
+    
+    
+        //    NetworkTableEntry ty = table.getEntry("ty");
+    
+          //  NetworkTableEntry ta = table.getEntry("ta");
+    
+                   
+    
+             // read  values periodically
+    
+            this.x = tx.getDouble(0.0);
+    
+           // this.y = ty.getDouble(0.0);
+    
+           // this.area = ta.getDouble(0.0);
+    
+            this.v = tv.getDouble(0.0);
+    
+    
+    
+            //post to smart dashboard periodically
+    
+            SmartDashboard.putNumber("LimelightX", x);
+    
+            //SmartDashboard.putNumber("LimelightY", y);
+    
+            //SmartDashboard.putNumber("LimelightArea", area);
+    
+            SmartDashboard.putNumber("LimelightVision", v);
+    
+            // Note quickturn and shift is taken care of with buttons in OI.
+    
+            // Put code here to be run every loop
+    
+    
     }
 
     // Put methods for controlling this subsystem
@@ -272,5 +332,43 @@ private boolean isQuickTurn = false;
         return stick.getZ();
     }
 
+    public void TurnToTarget() {
+
+
+
+        SmartDashboard.putNumber("LimelightXPTT", this.x);
+
+        SmartDashboard.putNumber("LimelightVPTT", this.v);
+
+
+
+        if (this.v >= 1){
+
+            if (this.x >= 5){
+
+                SetLeftRight(-.15,-.15); //TODO: is this the correct direction?
+
+            }
+
+            else if (this.x <= -5){
+
+                SetLeftRight(.15,.15); //TODO: is this the correct direction?
+
+            }
+
+            else {
+                SetLeftRight(0, 0);
+                //if pointed at target, do nothing
+
+            }
+
+        }
+
+
+
+    }
+
+
+    
 }
 
