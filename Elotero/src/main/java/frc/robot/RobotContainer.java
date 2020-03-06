@@ -66,12 +66,12 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
    */
   private void configureButtonBindings() {
 //Create a quickturn (qt) button and assign commands on press & release
-    final JoystickButton qT = new JoystickButton(m_driverCtrl, C.OI.quickTurn);
+    final JoystickButton qT = new JoystickButton(m_driverCtrl, C.OI.kRB);
     qT.whenPressed(new InstantCommand(m_driveTrain::setQuickTurn, m_driveTrain));
     qT.whenReleased(new InstantCommand(m_driveTrain::resetQuickTurn, m_driveTrain));
 
 
-    final JoystickButton flywheel = new JoystickButton(m_codriverCtrl, C.OI.flywheel);
+    final JoystickButton flywheel = new JoystickButton(m_codriverCtrl, C.OI.kLT);
     flywheel.whenPressed(new InstantCommand(m_flywheel::startShot, m_flywheel));
     flywheel.whenReleased(new InstantCommand(m_flywheel::stopShot, m_flywheel));
 

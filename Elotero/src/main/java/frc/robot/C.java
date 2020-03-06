@@ -19,8 +19,8 @@ public final class C {
     public static final class OI{
         public static final int driverPort = 0; //controller USB port 0
         public static final int codriverPort = 1; //controller USB port 1
-        public static final int quickTurn = 6; //button map
-		public static final int flywheel = 8;//button map
+        public static final int kRB = 6; //button map
+		public static final int kLT = 8;//button map
     }
 
     public static final class CANid{
