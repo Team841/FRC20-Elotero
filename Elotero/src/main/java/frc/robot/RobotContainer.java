@@ -7,11 +7,15 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.C.*;
 import frc.robot.commands.AutoIndex;
 import frc.robot.commands.AutoStorage;
+import frc.robot.commands.ExtendOut;
+import frc.robot.commands.ExtendRectract;
+import frc.robot.commands.FlipOut;
 import frc.robot.commands.IntakePowerCell;
 import frc.robot.commands.IntakeSpitOut;
 import frc.robot.commands.RectractIntake;
@@ -20,6 +24,7 @@ import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
+import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -38,14 +43,21 @@ public class RobotContainer {
   private final Indexer m_indexer = new Indexer();
   private final Storage m_storage = new Storage();
   private final Intake m_intake = new Intake();
-
+  private final Climber m_Climber = new Climber();
+//Compresser defined here\ Compresser definia aqui
+  private final Compressor m_Compresser = new Compressor(0);
   // OI defined here
 private final Joystick m_driverCtrl = new Joystick(C.OI.driverPort);
 private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
+
+
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
+    m_Compresser.setClosedLoopControl(true);
+
     // Put stuff on Shuffleboard/SmartDashboard
 
       //stuff
@@ -70,27 +82,39 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-//Create a quickturn (qt) button and assign commands on press & release
+
+    //DRIVER
+    //Quick turn
     final JoystickButton qT = new JoystickButton(m_driverCtrl, C.OI.kRB);
     qT.whenPressed(new InstantCommand(m_driveTrain::setQuickTurn, m_driveTrain));
     qT.whenReleased(new InstantCommand(m_driveTrain::resetQuickTurn, m_driveTrain));
 
-
+    //CODRIVER
+    //Shoot
     final JoystickButton flywheel = new JoystickButton(m_codriverCtrl, C.OI.kLT);
     flywheel.whenPressed(new InstantCommand(m_flywheel::startShot, m_flywheel));
     flywheel.whenReleased(new InstantCommand(m_flywheel::stopShot, m_flywheel));
 
+    //AutoAim
     final JoystickButton turnTarget = new JoystickButton(m_codriverCtrl, 1);
     turnTarget.whileHeld(new InstantCommand(m_driveTrain::TurnToTarget, m_driveTrain));
 
+    //Activate the Intake (suck IN) / Activar Intake hacia adentro
     final JoystickButton intakeControl = new JoystickButton(m_codriverCtrl,C.OI.kB);
     intakeControl.whenPressed(new IntakePowerCell(m_intake));
     intakeControl.whenReleased(new RectractIntake(m_intake));
 
+    //Intake OUT / Sacar intake afuera
     final JoystickButton intakeSpitOut = new JoystickButton(m_codriverCtrl,C.OI.kA);
     intakeSpitOut.whenPressed(new IntakeSpitOut(m_intake));
 
-    final JoystickButton FlipOut = new JoystickButton(m)
+    //Reach the climber (extend it) / Desplegar el gancho
+    final JoystickButton FlipControl = new JoystickButton(m_codriverCtrl, C.OI.kLT);
+    FlipControl.whenPressed(new FlipOut(m_Climber));
+
+    final JoystickButton ExtendControl = new JoystickButton(m_codriverCtrl, C.OI.kLB);
+    ExtendControl.whenPressed(new ExtendOut(m_Climber));
+    ExtendControl.whenReleased(new ExtendRectract(m_Climber));
     }
   
 

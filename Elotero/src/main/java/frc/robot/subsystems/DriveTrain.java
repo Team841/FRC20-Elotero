@@ -372,7 +372,7 @@ private boolean isQuickTurn = false;
        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(C.Drive.LEDon);
     }
     public void LEDoff(){
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("LedMode").setNumber(C.Drive.LEDoff)
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("LedMode").setNumber(C.Drive.LEDoff);
     }
     
 }

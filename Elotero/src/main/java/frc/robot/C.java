@@ -20,9 +20,10 @@ public final class C {
         public static final int driverPort = 0; //controller USB port 0
         public static final int codriverPort = 1; //controller USB port 1
         public static final int kRB = 6; //button map
-        public static final int kLT = 8;//button map
+        public static final int kLT = 7;//button map
         public static final int kB = 3;
         public static final int kA = 2;
+        public static final int kLB = 5;
     }
 
     public static final class CANid{
@@ -92,5 +93,7 @@ public final class C {
         public static final int Module = 0;
         public static final int ChannelflipSolenoid = 1;
         public static final int ChannelextendSolenoid = 2;
+		public void ChannelflipSolenoid() {
+		}
     }
 }
