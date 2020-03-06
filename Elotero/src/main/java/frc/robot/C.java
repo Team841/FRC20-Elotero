@@ -21,6 +21,7 @@ public final class C {
         public static final int codriverPort = 1; //controller USB port 1
         public static final int kRB = 6; //button map
         public static final int kLT = 7;//button map
+        public static final int kRT = 8;
         public static final int kB = 3;
         public static final int kA = 2;
         public static final int kLB = 5;

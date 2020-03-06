@@ -91,8 +91,8 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
 
     //CODRIVER
     //Shoot
-    final JoystickButton flywheel = new JoystickButton(m_codriverCtrl, C.OI.kLT);
-    flywheel.whenPressed(new InstantCommand(m_flywheel::startShot, m_flywheel));
+    final JoystickButton flywheel = new JoystickButton(m_codriverCtrl, C.OI.kRT);
+    flywheel.whenPressed(new InstantCommand(m_flywheel::startShot, m_flywheel);
     flywheel.whenReleased(new InstantCommand(m_flywheel::stopShot, m_flywheel));
 
     //AutoAim
@@ -107,7 +107,7 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
     //Intake OUT / Sacar intake afuera
     final JoystickButton intakeSpitOut = new JoystickButton(m_codriverCtrl,C.OI.kA);
     intakeSpitOut.whenPressed(new IntakeSpitOut(m_intake));
-
+    intakeSpitOut.whenReleased(new RectractIntake(m_intake));
     //Reach the climber (extend it) / Desplegar el gancho
     final JoystickButton FlipControl = new JoystickButton(m_codriverCtrl, C.OI.kLT);
     FlipControl.whenPressed(new FlipOut(m_Climber));
