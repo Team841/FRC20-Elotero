@@ -90,6 +90,8 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
 
     return null; //TODO Auto command is broken right now, remove this when ready to run
 
+    //TODO Create a selector for the three different Commands.
+
     // An ExampleCommand will run in autonomous
 //    return m_autoCommand;
   }
