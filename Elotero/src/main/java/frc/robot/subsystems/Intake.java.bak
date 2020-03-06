@@ -7,19 +7,14 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.C;
 
-public class Climber extends SubsystemBase {
+public class Intake extends SubsystemBase {
   /**
-   * Creates a new Climber.
+   * Creates a new Intake.
    */
-  public final Solenoid flipSolenoid;
-  public final Solenoid extendSolenoid;
-  public Climber() {
-      flipSolenoid = new Solenoid(C.Climber.Module, C.Climber.ChannelflipSolenoid);
-      extendSolenoid = new Solenoid(C.Climber.Module,C.Climber.ChannelextendSolenoid);
+  public Intake() {
+
   }
 
   @Override

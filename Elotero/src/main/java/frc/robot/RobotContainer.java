@@ -12,8 +12,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.C.*;
 import frc.robot.commands.AutoIndex;
 import frc.robot.commands.AutoStorage;
+import frc.robot.commands.IntakePowerCell;
+import frc.robot.commands.IntakeSpitOut;
+import frc.robot.commands.RectractIntake;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -33,6 +37,7 @@ public class RobotContainer {
   private final Shooter m_flywheel = new Shooter();
   private final Indexer m_indexer = new Indexer();
   private final Storage m_storage = new Storage();
+  private final Intake m_intake = new Intake();
 
   // OI defined here
 private final Joystick m_driverCtrl = new Joystick(C.OI.driverPort);
@@ -77,6 +82,15 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
 
     final JoystickButton turnTarget = new JoystickButton(m_codriverCtrl, 1);
     turnTarget.whileHeld(new InstantCommand(m_driveTrain::TurnToTarget, m_driveTrain));
+
+    final JoystickButton intakeControl = new JoystickButton(m_codriverCtrl,C.OI.kB);
+    intakeControl.whenPressed(new IntakePowerCell(m_intake));
+    intakeControl.whenReleased(new RectractIntake(m_intake));
+
+    final JoystickButton intakeSpitOut = new JoystickButton(m_codriverCtrl,C.OI.kA);
+    intakeSpitOut.whenPressed(new IntakeSpitOut(m_intake));
+
+    final JoystickButton FlipOut = new JoystickButton(m)
     }
   
 

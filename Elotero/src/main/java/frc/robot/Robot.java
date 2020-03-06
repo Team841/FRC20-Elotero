@@ -26,8 +26,8 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 SendableChooser<Command> chooser = new SendableChooser<>();
-chooser.setDefaultOption("Autonomous Command", new AutonomousCommand());
-SmartDashboard.putData("Auto mode", chooser);
+//chooser.setDefaultOption("Autonomous Command", new AutonomousCommand());
+//SmartDashboard.putData("Auto mode", chooser);
 
   /**
    * This function is run when the robot is first started up and should be used for any

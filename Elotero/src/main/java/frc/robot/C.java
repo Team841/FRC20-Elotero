@@ -20,7 +20,9 @@ public final class C {
         public static final int driverPort = 0; //controller USB port 0
         public static final int codriverPort = 1; //controller USB port 1
         public static final int kRB = 6; //button map
-		public static final int kLT = 8;//button map
+        public static final int kLT = 8;//button map
+        public static final int kB = 3;
+        public static final int kA = 2;
     }
 
     public static final class CANid{
@@ -51,7 +53,8 @@ public final class C {
         public static final double sensitivityLow = 0.75;
         public static final double centervalue = 140;
         public static final double tolerance = 10;
-
+        public static final double LEDon = 3;
+        public static final double LEDoff = 1;
     }
 
 	public static final class Shoot{
@@ -75,5 +78,19 @@ public final class C {
     public static final class Index{
         public static final double IndexPower = 0.3;
         public static final int SensorChannel = 8;
+    }
+
+    public static final class intake {
+        public static final int Module = 0;
+        public static final int Channel = 0;
+        
+        public static final double rollerPower = 0.6;
+        public static final double rollerSpitOutPower = -0.6;
+    
+    }
+    public static final class Climber {
+        public static final int Module = 0;
+        public static final int ChannelflipSolenoid = 1;
+        public static final int ChannelextendSolenoid = 2;
     }
 }

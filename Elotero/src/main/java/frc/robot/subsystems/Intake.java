@@ -7,21 +7,40 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.C;
 
-public class Climber extends SubsystemBase {
+public class Intake extends SubsystemBase {
   /**
-   * Creates a new Climber.
+   * Creates a new Intake.
    */
-  public final Solenoid flipSolenoid;
-  public final Solenoid extendSolenoid;
-  public Climber() {
-      flipSolenoid = new Solenoid(C.Climber.Module, C.Climber.ChannelflipSolenoid);
-      extendSolenoid = new Solenoid(C.Climber.Module,C.Climber.ChannelextendSolenoid);
-  }
 
+   private final Solenoid elbow;
+
+   private final CANSparkMax roller;
+  public Intake() {
+    elbow = new Solenoid(C.intake.Module, C.intake.Channel);
+roller = new CANSparkMax(C.CANid.intake, MotorType.kBrushless);
+  }
+public void elbowOut(){
+  elbow.set(true);
+}
+public void elbowIn(){
+  elbow.set(false);
+}
+public void rollerOn(){
+  roller.set(C.intake.rollerPower);
+}
+public void rollerOff(){
+  roller.set(0);
+}
+public void rollerSpitOut(){
+  roller.set (C.intake.rollerSpitOutPower);
+}
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
