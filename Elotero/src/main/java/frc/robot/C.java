@@ -4,7 +4,6 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 /**
@@ -15,21 +14,30 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {
+public final class C {
 
     public static final class OI{
-        public static final int driverPort = 0; //controller port map
-        public static final int quickTurn = 6; //button map
-		public static final int flywheel = 8;//button map
+        public static final int driverPort = 0; //controller USB port 0
+        public static final int codriverPort = 1; //controller USB port 1
+        public static final int kRB = 6; //button map
+		public static final int kLT = 8;//button map
+    }
+
+    public static final class CANid{
+        public static final int driveRight1 = 3;
+        public static final int driveRight2 = 4; 
+        public static final int driveLeft1 = 1;
+        public static final int driveLeft2 = 2;
+        public static final int shootLeft = 6;
+        public static final int shootRight = 5;
+        public static final int storage = 12; //SparkMAX needs to get programmed to match this
+        public static final int index = 11; //SparkMAX needs to get programmed to match this
+        public static final int intake = 10;
     }
 
     public static final class Drive{
         
         //Physical setup of the drive
-        public static final int CANidRight1 = 1;
-        public static final int CANidRight2 = 2; 
-        public static final int CANidLeft1 = 3;
-        public static final int CANidLeft2 = 4;
 
         //Current limit setup based on legacy SRX interface //TODO: Update current limit for FX
 //      public static final double contCurrentLimit = 45; //continuous current limit (45A default) 
@@ -39,7 +47,7 @@ public final class Constants {
         //Tuning the Chezy Drive - deadband, sensitivity & tolerancing values on raw joystick inputs
         public static final double throttleDeadband = 0.02; 
         public static final double wheelDeadband = 0.02;	
-        public static final double sensitivityHigh = 0.85;	
+         public static final double sensitivityHigh = 0.85;	
         public static final double sensitivityLow = 0.75;
         public static final double centervalue = 140;
         public static final double tolerance = 10;
@@ -47,8 +55,25 @@ public final class Constants {
     }
 
 	public static final class Shoot{
-        public static final int CANidShootLeft = 6;
-        public static final int CANidShootRight = 5;
-		public static final double shotPower = 0.1;
+        public static final double shotPower = 0.85;
+        public static final double velocitySetPoint = 12000;
+        public static final double kP = 0.01;
+        public static final double kI = 0;
+        public static final double kD = 5;
+        public static final double kF = 0.045;
+        public static final int kPIDLoopIdx = 0;
+        public static final int kTimeoutMs = 30;
+
+    }
+
+	
+	public static final class Storaged{
+        public static final double StorePower = 0.6;
+        public static final int SensorChannel = 9;
+    
+    }
+    public static final class Index{
+        public static final double IndexPower = 0.3;
+        public static final int SensorChannel = 8;
     }
 }
