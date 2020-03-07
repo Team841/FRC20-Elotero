@@ -97,10 +97,10 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
     flywheel.whenReleased(new InstantCommand(m_shooter::stopShot, m_shooter));
 
     //AutoAim
-    final JoystickButton turnTarget = new JoystickButton(m_codriverCtrl, C.OI.kB);
+    final JoystickButton turnTarget = new JoystickButton(m_codriverCtrl, C.OI.kX);
     turnTarget.whileHeld(new InstantCommand(m_driveTrain::TurnToTarget, m_driveTrain));
 
-    final JoystickButton LimeLightLed = new JoystickButton(m_codriverCtrl, C.OI.kB);
+    final JoystickButton LimeLightLed = new JoystickButton(m_codriverCtrl, C.OI.kX);
     LimeLightLed.whenPressed(new InstantCommand(m_driveTrain::LEDon, m_driveTrain));
     LimeLightLed.whenReleased(new InstantCommand(m_driveTrain::LEDoff, m_driveTrain));
 

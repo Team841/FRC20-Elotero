@@ -23,8 +23,20 @@ private final WPI_TalonFX right2 = new WPI_TalonFX(C.CANid.driveRight2);
 private double x = 0;
 
 private double v = 0;
+private NetworkTable table; 
+
+private NetworkTableEntry tx;
+
+//NetworkTableEntry ty; 
+
+// NetworkTableEntry ta; 
+
+private NetworkTableEntry tv; 
+
 //Constructor creates & sets up a new DriveTrain
 public DriveTrain() {
+
+    table = NetworkTableInstance.getDefault().getTable("limelight");
     //Controller housekeeping in the constructor
     left1.configFactoryDefault();
     right1.configFactoryDefault();
@@ -47,25 +59,18 @@ public DriveTrain() {
     public void periodic() {
         // Put code here to be run every loop: vision updates, odometry updates, etc
         // Normal drive code doesn't go here, drive is a method below
-        NetworkTable table; 
-
-        NetworkTableEntry tx;
-    
-        //NetworkTableEntry ty; 
-    
-       // NetworkTableEntry ta; 
-    
-        NetworkTableEntry tv; 
-    
+     
             
     
             // Update values of the table
     
-            table = NetworkTableInstance.getDefault().getTable("limelight");
+           
     
             tx = table.getEntry("tx");
     
             tv = table.getEntry("tv");
+
+           
     
     
     
@@ -369,10 +374,12 @@ private boolean isQuickTurn = false;
     }
 
     public void LEDon(){
-       NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(C.Drive.LEDon);
+      // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);
+      table.getEntry("ledMode").setNumber(3);//putNumber("ledMode",3);
     }
     public void LEDoff(){
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("LedMode").setNumber(C.Drive.LEDoff);
+      //  NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+      table.getEntry("ledMode").setNumber(1);//putNumber("ledMode",1);
     }
     
 }
