@@ -80,7 +80,7 @@ public final class C {
     
     }
     public static final class Index{
-        public static final double IndexPower = 0.8;
+        public static final double IndexPower = 0.5;
         public static final int SensorChannel = 8;
     }
 
