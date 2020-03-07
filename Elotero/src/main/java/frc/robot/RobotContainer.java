@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.C.*;
 import frc.robot.commands.AutoIndex;
 import frc.robot.commands.AutoStorage;
+import frc.robot.commands.AutonomousStraight;
 import frc.robot.commands.ExtendOut;
 import frc.robot.commands.ExtendRectract;
 import frc.robot.commands.FlipOut;
@@ -29,6 +30,7 @@ import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 /**
@@ -51,6 +53,7 @@ public class RobotContainer {
 private final Joystick m_driverCtrl = new Joystick(C.OI.driverPort);
 private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
 
+private SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -60,6 +63,9 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
     m_Compresser.setClosedLoopControl(true);
 
     // Put stuff on Shuffleboard/SmartDashboard
+    chooser.setDefaultOption("Autonomous Straight", new AutonomousStraight(m_driveTrain));
+    //chooser.addOption("Auto 2", new ...);
+    SmartDashboard.putData("Auto mode", chooser);
 
       //stuff
     // Configure the button bindings
@@ -131,11 +137,13 @@ private final Joystick m_codriverCtrl = new Joystick(C.OI.codriverPort);
    */
   public Command getAutonomousCommand() {
 
-    return null; //TODO Auto command is broken right now, remove this when ready to run
-
-    //TODO Create a selector for the three different Commands.
+ 
 
     // An ExampleCommand will run in autonomous
 //    return m_autoCommand;
+    //Command m_command = new AutonomousStraight(m_driveTrain);
+    //return  m_command;
+    //return new AutonomousStraight(m_driveTrain); // THIS ONE IS ONLY FOR TESTING, IT GOES STRAIGHT
+    return chooser.getSelected(); //TODO, THIS ONE IS THE ONE!
   }
 }
