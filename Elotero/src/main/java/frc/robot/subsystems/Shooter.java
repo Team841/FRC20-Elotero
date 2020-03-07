@@ -85,5 +85,7 @@ public void startShot(){
   shootRightTalonFX.set(ControlMode.Velocity, SmartDashboard.getNumber("velocity",C.Shoot.velocitySetPoint ));
 
 }
-
+public int getSpeed(){
+  return shootRightTalonFX.getSelectedSensorVelocity();
+}
 }
