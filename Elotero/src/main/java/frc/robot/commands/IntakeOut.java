@@ -8,30 +8,31 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Intake;
 
-public class SetDriveStraightPower extends CommandBase {
+public class IntakeOut extends CommandBase {
   /**
-   * Creates a new SetDriveStraightPower.
+   * Creates a new IntakeOut.
    */
-  private final DriveTrain m_DriveTrain;
-  private final double power;
-  public SetDriveStraightPower(DriveTrain subsystem,double s_power) {;
-    m_DriveTrain = subsystem;
-    power = s_power;
-
+  private final Intake m_Intake;
+  private final boolean m_Out;
+  public IntakeOut(Intake subsystem,boolean Out) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+  m_Intake = subsystem;
+  m_Out = Out;
+   addRequirements(m_Intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("SetDriveStraightPower initialize with power=" + power);
-    m_DriveTrain.SetLeftRight(power, -power);
-
+    if (m_Out){
+      m_Intake.elbowOut();
+    }else {
+      m_Intake.elbowIn();
+    }
+  
   }
-
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -41,7 +42,6 @@ public class SetDriveStraightPower extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_DriveTrain.SetLeftRight(0, 0);
   }
 
   // Returns true when the command should end.

@@ -29,10 +29,10 @@ public final class C {
     }
 
     public static final class CANid{
-        public static final int driveRight1 = 3;
-        public static final int driveRight2 = 4; 
-        public static final int driveLeft1 = 1;
-        public static final int driveLeft2 = 2;
+        public static final int driveRight1 = 1;
+        public static final int driveRight2 = 2; 
+        public static final int driveLeft1 = 3;
+        public static final int driveLeft2 = 4;
         public static final int shootLeft = 6;
         public static final int shootRight = 5;
         public static final int storage = 12; //SparkMAX needs to get programmed to match this
@@ -52,8 +52,8 @@ public final class C {
         //Tuning the Chezy Drive - deadband, sensitivity & tolerancing values on raw joystick inputs
         public static final double throttleDeadband = 0.02; 
         public static final double wheelDeadband = 0.02;	
-         public static final double sensitivityHigh = 0.85;	
-        public static final double sensitivityLow = 0.75;
+         public static final double sensitivityHigh = 0.5;	
+        public static final double sensitivityLow = 0.5;
         public static final double centervalue = 140;
         public static final double tolerance = 10;
         public static final double LEDon = 3;
@@ -80,7 +80,7 @@ public final class C {
     
     }
     public static final class Index{
-        public static final double IndexPower = 0.5;
+        public static final double IndexPower = 0.6;
         public static final int SensorChannel = 8;
     }
 

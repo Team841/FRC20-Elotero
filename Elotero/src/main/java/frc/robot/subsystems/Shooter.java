@@ -86,6 +86,6 @@ public void startShot(){
 
 }
 public int getSpeed(){
-  return shootRightTalonFX.getSelectedSensorVelocity();
+  return shootRightTalonFX.getSelectedSensorVelocity(C.Shoot.kPIDLoopIdx);
 }
 }

@@ -8,6 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Intake;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -17,9 +19,10 @@ public class ClimbSequence extends SequentialCommandGroup {
    * Creates a new ClimbSequence.
    */
   
-  public ClimbSequence() {
+  public ClimbSequence(Intake m_Intake,Climber m_Climber) {
+
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super();
+    super(new IntakeOut(m_Intake, true).withTimeout(1),new FlipOut(m_Climber));
   }
 }

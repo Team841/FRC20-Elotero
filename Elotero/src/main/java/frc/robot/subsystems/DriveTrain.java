@@ -8,32 +8,35 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import frc.robot.C;
+
 /**
  *
  */
 public class DriveTrain extends SubsystemBase {
 
-private final WPI_TalonFX left1 = new WPI_TalonFX(C.CANid.driveLeft1);
-private final WPI_TalonFX left2 = new WPI_TalonFX(C.CANid.driveLeft2);
-private final WPI_TalonFX right1 = new WPI_TalonFX(C.CANid.driveRight1);
-private final WPI_TalonFX right2 = new WPI_TalonFX(C.CANid.driveRight2);
-private double x = 0;
+    private final WPI_TalonFX left1 = new WPI_TalonFX(C.CANid.driveLeft1);
+    private final WPI_TalonFX left2 = new WPI_TalonFX(C.CANid.driveLeft2);
+    private final WPI_TalonFX right1 = new WPI_TalonFX(C.CANid.driveRight1);
+    private final WPI_TalonFX right2 = new WPI_TalonFX(C.CANid.driveRight2);
+    private double x = 0;
 
-private double v = 0;
-private NetworkTable table; 
+    private double v = 0;
+    private NetworkTable table;
 
-private NetworkTableEntry tx;
+    private NetworkTableEntry tx;
 
-//NetworkTableEntry ty; 
+    // NetworkTableEntry ty;
 
-// NetworkTableEntry ta; 
+    // NetworkTableEntry ta;
 
-private NetworkTableEntry tv; 
+    private NetworkTableEntry tv;
 
-//Constructor creates & sets up a new DriveTrain
+    // Constructor creates & sets up a new DriveTrain
 public DriveTrain() {
 
     table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -42,6 +45,10 @@ public DriveTrain() {
     right1.configFactoryDefault();
     left2.configFactoryDefault();
     right2.configFactoryDefault();
+    left1.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 40, 0, 0));
+    left2.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 40, 0, 0));
+    right1.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 40, 0, 0));
+    right2.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 40, 0, 0));
 
     //Set #2 controllers to follow #1 in both drives
     left2.follow(left1);
@@ -210,9 +217,9 @@ private boolean isQuickTurn = false;
             }
             overPower = 1.0;
             if (isHighGear) {
-                sensitivity = .01;
+                sensitivity = .005;
             } else {
-                sensitivity = 0.01;
+                sensitivity = 0.005;
 
             }
             angularPower = wheel;
@@ -256,7 +263,6 @@ private boolean isQuickTurn = false;
      * @return yAxis
      */
     public void SetLeftRight(double LPower, double RPower) {
-
         right1.set(RPower * 1);
         //right2.set(RPower); 
         //right3.set(RPower);
@@ -351,13 +357,13 @@ private boolean isQuickTurn = false;
 
             if (this.x >= 5){
 
-                SetLeftRight(-.15,-.15); //TODO: is this the correct direction?
+                SetLeftRight(-.1,-.1); //TODO: is this the correct direction?
 
             }
 
             else if (this.x <= -5){
 
-                SetLeftRight(.15,.15); //TODO: is this the correct direction?
+                SetLeftRight(.1,.1); //TODO: is this the correct direction?
 
             }
 

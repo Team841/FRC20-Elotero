@@ -14,6 +14,7 @@ import frc.robot.C.*;
 import frc.robot.commands.AutoIndex;
 import frc.robot.commands.AutoStorage;
 import frc.robot.commands.AutonomousStraight;
+import frc.robot.commands.ClimbSequence;
 import frc.robot.commands.ExtendOut;
 import frc.robot.commands.ExtendRectract;
 import frc.robot.commands.FlipOut;
@@ -96,15 +97,17 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
     qT.whenPressed(new InstantCommand(m_driveTrain::setQuickTurn, m_driveTrain));
     qT.whenReleased(new InstantCommand(m_driveTrain::resetQuickTurn, m_driveTrain));
 
-    //CODRIVER
+     //AutoAim
+     final JoystickButton turnTarget = new JoystickButton(m_driverCtrl, C.OI.kRT);
+     turnTarget.whileHeld(new InstantCommand(m_driveTrain::TurnToTarget, m_driveTrain));
+
+    
     //Shoot
-    final JoystickButton flywheel = new JoystickButton(m_codriverCtrl, C.OI.kRT);
+    final JoystickButton flywheel = new JoystickButton(m_driverCtrl, C.OI.kLT);
     flywheel.whileHeld(new ShooterSequence(m_shooter, m_indexer));
     flywheel.whenReleased(new InstantCommand(m_shooter::stopShot, m_shooter));
 
-    //AutoAim
-    final JoystickButton turnTarget = new JoystickButton(m_codriverCtrl, C.OI.kX);
-    turnTarget.whileHeld(new InstantCommand(m_driveTrain::TurnToTarget, m_driveTrain));
+   //CODRIVER
 
     final JoystickButton LimeLightLed = new JoystickButton(m_codriverCtrl, C.OI.kX);
     LimeLightLed.whenPressed(new InstantCommand(m_driveTrain::LEDon, m_driveTrain));
@@ -121,7 +124,7 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
     intakeSpitOut.whenReleased(new RectractIntake(m_intake));
     //Reach the climber (extend it) / Desplegar el gancho
     final JoystickButton FlipControl = new JoystickButton(m_codriverCtrl, C.OI.kLT);
-    FlipControl.whenPressed(new FlipOut(m_Climber));
+    FlipControl.whenPressed(new ClimbSequence(m_intake,m_Climber));
 
     final JoystickButton ExtendControl = new JoystickButton(m_codriverCtrl, C.OI.kLB);
     ExtendControl.whenPressed(new ExtendOut(m_Climber));
@@ -143,7 +146,8 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
 //    return m_autoCommand;
     //Command m_command = new AutonomousStraight(m_driveTrain);
     //return  m_command;
-    //return new AutonomousStraight(m_driveTrain); // THIS ONE IS ONLY FOR TESTING, IT GOES STRAIGHT
-    return chooser.getSelected(); //TODO, THIS ONE IS THE ONE!
+    return new AutonomousStraight(m_driveTrain); // THIS ONE IS ONLY FOR TESTING, IT GOES STRAIGHT
+    //chooser.
+    //return chooser.getSelected(); //TODO, THIS ONE IS THE ONE!
   }
 }

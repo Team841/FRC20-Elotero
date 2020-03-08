@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveTrain;
@@ -21,6 +22,7 @@ public class AutonomousStraight extends SequentialCommandGroup {
   public AutonomousStraight(DriveTrain m_DriveTrain) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    super(new SetDriveStraightPower((m_DriveTrain),.5),new WaitCommand(.3),new SetDriveStraightPower(m_DriveTrain, 0),new WaitCommand(20));
+    super(new PrintCommand("running auto straight"),new SetDriveStraightPower((m_DriveTrain),.3).withTimeout(1),new PrintCommand("stopped driving in auto"), new WaitCommand(20));
+    System.out.println("created AutonomousStraight");
   }
 }

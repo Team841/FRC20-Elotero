@@ -42,7 +42,14 @@ public class Shoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
+    //if(m_Shooter.getSpeed() > (0.90*C.Shoot.velocitySetPoint)){
+    //  return true;
+   // }
+    //else{
+    //  return false;
+
+    //}
     //return  m_Shooter.getSpeed() > (0.95*C.Shoot.velocitySetPoint)  ;
   }
 }
