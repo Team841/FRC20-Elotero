@@ -8,28 +8,29 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Climber;
-public class ExtendRectract extends CommandBase {
+import frc.robot.subsystems.DriveTrain;
+
+public class AutoAim extends CommandBase {
   /**
-   * Creates a new ExtendRectract.
+   * Creates a new AutoAim.
    */
-  private final Climber m_Climber;
-  public ExtendRectract(Climber subsystem) {
+  private final DriveTrain m_DriveTrain;
+  public AutoAim(DriveTrain subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_Climber = subsystem;
-    addRequirements(m_Climber);
-  
+  m_DriveTrain = subsystem;
+  addRequirements(m_DriveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Climber.extendSolenoid.set(false);
-  }
+  
+}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+  m_DriveTrain.TurnToTarget();
   }
 
   // Called once the command ends or is interrupted.

@@ -355,13 +355,13 @@ private boolean isQuickTurn = false;
 
         if (this.v >= 1){
 
-            if (this.x >= 5){
+            if (this.x >= 3){
 
                 SetLeftRight(-.1,-.1); //TODO: is this the correct direction?
 
             }
 
-            else if (this.x <= -5){
+            else if (this.x <= -3){
 
                 SetLeftRight(.1,.1); //TODO: is this the correct direction?
 
