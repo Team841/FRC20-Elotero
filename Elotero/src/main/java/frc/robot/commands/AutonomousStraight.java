@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveTrain;
 
+
 // NOTE:  Consider using this command inline rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
@@ -19,10 +20,15 @@ public class AutonomousStraight extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousStraight.
    */
-  public AutonomousStraight(DriveTrain m_DriveTrain) {
-    // Add your commands in the super() call, e.g.
+
+  public AutonomousStraight(DriveTrain m_DriveTrain){
+   // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    super(new PrintCommand("running auto straight"),new SetDriveStraightPower((m_DriveTrain),.3).withTimeout(1),new PrintCommand("stopped driving in auto"), new WaitCommand(20));
+    super(new PrintCommand("Shooting auto straight"), new SetDriveStraightPower((m_DriveTrain),-.3).withTimeout(1),new PrintCommand("stopped driving in auto"), new WaitCommand(20));
     System.out.println("created AutonomousStraight");
   }
+
+  
+
+
 }
