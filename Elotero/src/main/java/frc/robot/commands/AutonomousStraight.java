@@ -7,8 +7,6 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Indexer;
-import frc.robot.commands.ShooterSequence;
-
 
 
 // NOTE:  Consider using this command inline rather than writing a subclass.  For more
@@ -19,7 +17,7 @@ public class AutonomousStraight extends SequentialCommandGroup {
    * Creates a new AutonomousStraight.
    */
 
-  public AutonomousStraight(DriveTrain m_DriveTrain, Indexer m_Indexer, Shooter m_Shooter){
+  public AutonomousStraight(final DriveTrain m_DriveTrain, final Indexer m_Indexer, final Shooter m_Shooter) {
    // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
     super(new PrintCommand("back auto started"),
@@ -27,7 +25,7 @@ public class AutonomousStraight extends SequentialCommandGroup {
     new ShooterSequence(m_Shooter, m_Indexer),
     
     //Stop the shot (it has to be called as a command)
-    //m_Shooter.stopShot();
+    new StopShoot(m_Shooter),
     new PrintCommand("Shooter Stop, Drive back start."),
     
     //Drive backwards
