@@ -22,6 +22,8 @@ public class ShooterSequence extends SequentialCommandGroup {
   public ShooterSequence(Shooter m_Shooter,Indexer m_Indexer) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new Shoot(m_Shooter).withTimeout(.5), new ForceIndex(m_Indexer).withTimeout(.5),new StopIndex(m_Indexer).withTimeout(.5));
+    super(new Shoot(m_Shooter).withTimeout(.5), 
+    new ForceIndex(m_Indexer).withTimeout(.25),
+    new StopIndex(m_Indexer).withTimeout(.25));
   }
 }

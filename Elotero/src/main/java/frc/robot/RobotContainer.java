@@ -64,7 +64,7 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
     m_Compresser.setClosedLoopControl(true);
 
     // Put stuff on Shuffleboard/SmartDashboard
-    chooser.setDefaultOption("Autonomous Straight", new AutonomousStraight(m_driveTrain));
+    chooser.setDefaultOption("Autonomous Straight", new AutonomousStraight(m_driveTrain, m_indexer, m_shooter));
     //chooser.addOption("Auto 2", new ...);
     SmartDashboard.putData("Auto mode", chooser);
 
@@ -146,7 +146,7 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
 //    return m_autoCommand;
     //Command m_command = new AutonomousStraight(m_driveTrain);
     //return  m_command;
-    return new AutonomousStraight(m_driveTrain); // THIS ONE IS ONLY FOR TESTING, IT GOES STRAIGHT
+    return new AutonomousStraight(m_driveTrain, m_indexer, m_shooter); // THIS ONE IS ONLY FOR TESTING, IT GOES STRAIGHT
     //chooser.
     //return chooser.getSelected(); //TODO, THIS ONE IS THE ONE!
   }
