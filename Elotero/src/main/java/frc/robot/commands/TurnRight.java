@@ -8,25 +8,30 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.DriveTrain;
 
-public class StopShoot extends CommandBase {
+public class TurnRight extends CommandBase {
   /**
-   * Creates a new Shoot.
+   * Creates a new TurnRight.
    */
-  private final Shooter m_Shooter;
-  public StopShoot(Shooter subsystem) {
+  private final DriveTrain m_DriveTrain;
+  private final double power;
+  public TurnRight(DriveTrain subsystem,double s_power) {;
+    m_DriveTrain = subsystem;
+    power = s_power;
+
     // Use addRequirements() here to declare subsystem dependencies.
-    m_Shooter = subsystem;
-    addRequirements(m_Shooter);
+    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Shooter.stopShot();
- 
+    System.out.println("TurnRight initialize with power=" + power);
+    m_DriveTrain.SetLeftRight(-power, -power);
+
   }
+
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -36,6 +41,7 @@ public class StopShoot extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_DriveTrain.SetLeftRight(0, 0);
   }
 
   // Returns true when the command should end.
