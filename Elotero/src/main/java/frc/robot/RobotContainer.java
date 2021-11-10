@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.C.*;
+import frc.robot.commands.Auto6BallShoot;
 import frc.robot.commands.AutoIndex;
+import frc.robot.commands.AutoShoot;
+import frc.robot.commands.AutoShootPickup;
 import frc.robot.commands.AutoStorage;
 import frc.robot.commands.AutonomousStraight;
 import frc.robot.commands.ClimbSequence;
@@ -64,7 +67,12 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
     m_Compresser.setClosedLoopControl(true);
 
     // Put stuff on Shuffleboard/SmartDashboard
-    chooser.setDefaultOption("Autonomous Straight", new AutonomousStraight(m_driveTrain, m_indexer, m_shooter));
+    chooser.setDefaultOption("Autonomous Straight", new AutonomousStraight(m_driveTrain, m_indexer, m_shooter,m_intake));
+   chooser.addOption("3ball Auto", new AutoShoot(m_shooter, m_indexer));
+   
+   chooser.addOption("Auto6BallShoot", new Auto6BallShoot(m_driveTrain, m_indexer, m_shooter, m_intake));
+   chooser.addOption("AutoShootPickUp", new AutoShootPickup(m_driveTrain, m_indexer, m_shooter, m_intake));
+
     //chooser.addOption("Auto 2", new ...);
     SmartDashboard.putData("Auto mode", chooser);
 
@@ -125,10 +133,11 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
     //Reach the climber (extend it) / Desplegar el gancho
     final JoystickButton FlipControl = new JoystickButton(m_codriverCtrl, C.OI.kLT);
     FlipControl.whenPressed(new ClimbSequence(m_intake,m_Climber));
-
+    // Climber retracts
     final JoystickButton ExtendControl = new JoystickButton(m_codriverCtrl, C.OI.kLB);
     ExtendControl.whenPressed(new ExtendOut(m_Climber));
     ExtendControl.whenReleased(new ExtendRectract(m_Climber));
+
     }
   
 
@@ -146,8 +155,10 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
 //    return m_autoCommand;
     //Command m_command = new AutonomousStraight(m_driveTrain);
     //return  m_command;
-    return new AutonomousStraight(m_driveTrain, m_indexer, m_shooter); // THIS ONE IS ONLY FOR TESTING, IT GOES STRAIGHT
+    //return new AutonomousStraight(m_driveTrain, m_indexer, m_shooter,m_intake); // THIS ONE IS ONLY FOR TESTING, IT GOES STRAIGHT
     //chooser.
+    return chooser.getSelected();
+  
     //return chooser.getSelected(); //TODO, THIS ONE IS THE ONE!
   }
 }

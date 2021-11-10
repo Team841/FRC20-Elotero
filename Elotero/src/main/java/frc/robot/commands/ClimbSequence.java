@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
 
@@ -23,6 +24,7 @@ public class ClimbSequence extends SequentialCommandGroup {
 
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new IntakeOut(m_Intake, true).withTimeout(1),new FlipOut(m_Climber));
+    super(new IntakeOut(m_Intake, true).withTimeout(1),new FlipOut(m_Climber).withTimeout(1),new WaitCommand(1.75), new IntakeOut((m_Intake), false).withTimeout(1) );
+
   }
 }

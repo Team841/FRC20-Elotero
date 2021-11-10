@@ -8,18 +8,17 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
-import frc.robot.C;
 
 
 // NOTE:  Consider using this command inline rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class AutonomousStraight extends SequentialCommandGroup {
+public class AutoShootPickup extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousStraight.
    */
 
-  public AutonomousStraight(final DriveTrain m_DriveTrain, final Indexer m_Indexer, final Shooter m_Shooter, Intake m_Intake) {
+  public AutoShootPickup(final DriveTrain m_DriveTrain, final Indexer m_Indexer, final Shooter m_Shooter, Intake m_Intake) {
    // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
     super(new PrintCommand("back auto started"),
@@ -27,10 +26,6 @@ public class AutonomousStraight extends SequentialCommandGroup {
     // 3 ball auto starts here
     new AutoShoot(m_Shooter, m_Indexer),
     new PrintCommand("Three balls shot"),
-
-    //Stop the shot (it has to be called as a command)
-    new StopShoot(m_Shooter).withTimeout(.05),
-    new PrintCommand("Shooter Stop, Drive back start."),
     
     //Turn right 160
     new TurnRight((m_DriveTrain),.3).withTimeout(.6),
