@@ -25,7 +25,7 @@ public class DriveTrain extends SubsystemBase {
     private final WPI_TalonFX right2 = new WPI_TalonFX(C.CANid.driveRight2);
     private double x = 0;
 
-    private double v = 0;
+    private double a = 0;
     private NetworkTable table;
 
     private NetworkTableEntry tx;
@@ -34,7 +34,7 @@ public class DriveTrain extends SubsystemBase {
 
     // NetworkTableEntry ta;
 
-    private NetworkTableEntry tv;
+    private NetworkTableEntry ta;
 
     // Constructor creates & sets up a new DriveTrain
 public DriveTrain() {
@@ -75,7 +75,7 @@ public DriveTrain() {
     
             tx = table.getEntry("tx");
     
-            tv = table.getEntry("tv");
+            ta = table.getEntry("ta");
 
            
     
@@ -89,14 +89,14 @@ public DriveTrain() {
     
              // read  values periodically
     
-            this.x = tx.getDouble(0.0);
+            x = tx.getDouble(0.0);
+            //this.y = ty.getDouble(0.0);
+            a = ta.getDouble(0.0);
     
-           // this.y = ty.getDouble(0.0);
-    
+
            // this.area = ta.getDouble(0.0);
     
-            this.v = tv.getDouble(0.0);
-    
+            
     
     
             //post to smart dashboard periodically
@@ -105,9 +105,10 @@ public DriveTrain() {
     
             //SmartDashboard.putNumber("LimelightY", y);
     
+
             //SmartDashboard.putNumber("LimelightArea", area);
     
-            SmartDashboard.putNumber("LimelightVision", v);
+            SmartDashboard.putNumber("LimelightA", a);
     
             // Note quickturn and shift is taken care of with buttons in OI.
     
@@ -347,21 +348,21 @@ private boolean isQuickTurn = false;
 
 
 
-        SmartDashboard.putNumber("LimelightXPTT", this.x);
+        SmartDashboard.putNumber("LimelightX", x);
 
-        SmartDashboard.putNumber("LimelightVPTT", this.v);
+        SmartDashboard.putNumber("LimelightA", a);
 
 
+        // If the area is greather than 0, center left or right.
+        if (a > 0){
 
-        if (this.v >= 1){
-
-            if (this.x >= 3){
+            if (x >= 3){
 
                 SetLeftRight(-.1,-.1); //TODO: is this the correct direction?
 
             }
 
-            else if (this.x <= -3){
+            else if (x <= -3){
 
                 SetLeftRight(.1,.1); //TODO: is this the correct direction?
 
@@ -374,7 +375,6 @@ private boolean isQuickTurn = false;
             }
 
         }
-
 
 
     }
