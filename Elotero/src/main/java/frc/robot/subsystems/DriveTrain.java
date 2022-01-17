@@ -356,13 +356,13 @@ private boolean isQuickTurn = false;
         // If the area is greather than 0, center left or right.
         if (a > 0){
 
-            if (x >= 3){
+            if (x >= C.Autoaim.targetDeadband){
 
-                SetLeftRight(-.1,-.1); //TODO: is this the correct direction?
+                SetLeftRight(-.1,-.1); 
 
             }
 
-            else if (x <= -3){
+            else if (x <= -C.Autoaim.targetDeadband){
 
                 SetLeftRight(.1,.1); //TODO: is this the correct direction?
 
@@ -387,6 +387,11 @@ private boolean isQuickTurn = false;
       //  NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
       table.getEntry("ledMode").setNumber(1);//putNumber("ledMode",1);
     }
+
+
+	public double limelightX() {
+		return x;
+	}
     
 }
 

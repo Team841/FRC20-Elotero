@@ -24,7 +24,7 @@ public class ClimbSequence extends SequentialCommandGroup {
 
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new IntakeOut(m_Intake, true).withTimeout(1),new FlipOut(m_Climber).withTimeout(1),new WaitCommand(1.75), new IntakeOut((m_Intake), false).withTimeout(1) );
+    super(new IntakeOut(m_Intake, true).withTimeout(1),new FlipOut(m_Climber).withTimeout(1),new WaitCommand(2.5), new IntakeOut((m_Intake), false).withTimeout(1) );
 
   }
 }

@@ -7,14 +7,18 @@
 
 package frc.robot.commands;
 
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.C;
 import frc.robot.subsystems.DriveTrain;
+
 
 public class AutoAim extends CommandBase {
   /**
    * Creates a new AutoAim.
    */
   private final DriveTrain m_DriveTrain;
+//  public final AutoAim C.java; 
   public AutoAim(DriveTrain subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
   m_DriveTrain = subsystem;
@@ -41,6 +45,13 @@ public class AutoAim extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    double target = C.Autoaim.targetDeadband;
+    double status = m_DriveTrain.limelightX();
+    return ((target>status) & (-target<status));
   }
+
+  
+
+  
+  
 }

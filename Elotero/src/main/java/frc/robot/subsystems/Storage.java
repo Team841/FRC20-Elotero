@@ -28,7 +28,7 @@ public class Storage extends SubsystemBase {
 Storemotor.restoreFactoryDefaults();
 
 
-Storemotor.setSmartCurrentLimit(40, 20); //Set current limits to be 40A while spinning & 20A while stopped
+Storemotor.setSmartCurrentLimit(30, 15); //Set current limits to be 40A while spinning & 20A while stopped
 
 Storemotor.burnFlash();
 

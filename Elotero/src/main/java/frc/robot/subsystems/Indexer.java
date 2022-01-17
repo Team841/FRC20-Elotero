@@ -23,7 +23,7 @@ public class Indexer extends SubsystemBase {
 private final DigitalInput Sensor = new DigitalInput(C.Index.SensorChannel);
   public Indexer() {
     Indexmotor.restoreFactoryDefaults();
-    Indexmotor.setSmartCurrentLimit(40, 20); //Set current limits to be 40A while spinning & 20A while stopped
+    Indexmotor.setSmartCurrentLimit(35, 20); //Set current limits to be 40A while spinning & 20A while stopped
     Indexmotor.burnFlash();
   }
 

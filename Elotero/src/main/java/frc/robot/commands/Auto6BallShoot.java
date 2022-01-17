@@ -32,19 +32,18 @@ public class Auto6BallShoot extends SequentialCommandGroup {
     new TurnRight((m_DriveTrain),.3).withTimeout(.6),
     new PrintCommand("Turned Right 160."),
 
-    // Drive straight
-    new SetDriveStraightPower((m_DriveTrain),.3).withTimeout(1.85),
-    new PrintCommand("Drove Straight"),
-
-    // Turn right 180
-    new TurnRight((m_DriveTrain),.3).withTimeout(.2),
-    new PrintCommand("TurnRight slight"),
-
     // Intake down
     new IntakeOut((m_Intake), true).withTimeout(.05),
     // Intake Roller on
     new RollerOn((m_Intake), true).withTimeout(.05),
 
+    // Drive straight
+    new SetDriveStraightPower((m_DriveTrain),.285).withTimeout(1.85),
+    new PrintCommand("Drove Straight"),
+
+    // Turn right slightly (20 degrees)
+    new TurnRight((m_DriveTrain),.3).withTimeout(.2),
+    new PrintCommand("TurnRight slight"),
 
     //Drive Straight
     new SetDriveStraightPower((m_DriveTrain), .3).withTimeout(2.33),

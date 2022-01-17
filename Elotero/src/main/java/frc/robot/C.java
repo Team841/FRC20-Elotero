@@ -26,6 +26,7 @@ public final class C {
         public static final int kA = 2;
         public static final int kLB = 5;
         public static final int kX = 1;
+        public static final int kY = 4;
     }
 
     public static final class CANid{
@@ -75,7 +76,7 @@ public final class C {
 
 	
 	public static final class Storaged{
-        public static final double StorePower = 0.6;
+        public static final double StorePower = 0.7;
         public static final int SensorChannel = 9;
     
     }
@@ -96,7 +97,13 @@ public final class C {
         public static final int Module = 0;
         public static final int ChannelflipSolenoid = 1;
         public static final int ChannelextendSolenoid = 2;
-		public void ChannelflipSolenoid() {
-		}
+		public void ChannelflipSolenoid() {}
+    }
+    public static final class Autoaim{
+        public static final double targetDeadband = 2.5;
+
+
+            
+		
     }
 }

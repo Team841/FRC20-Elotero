@@ -15,6 +15,7 @@ public class Shoot extends CommandBase {
   /**
    * Creates a new Shoot.
    */
+  
   private final Shooter m_Shooter;
   public Shoot(Shooter subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.

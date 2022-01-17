@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.C.*;
+import frc.robot.commands.Auto3ballsback;
+import frc.robot.commands.Auto6BallHold;
 import frc.robot.commands.Auto6BallShoot;
 import frc.robot.commands.AutoIndex;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoShootPickup;
 import frc.robot.commands.AutoStorage;
-import frc.robot.commands.AutonomousStraight;
+import frc.robot.commands.Auto6BallHold;
 import frc.robot.commands.ClimbSequence;
 import frc.robot.commands.ExtendOut;
 import frc.robot.commands.ExtendRectract;
@@ -25,6 +27,7 @@ import frc.robot.commands.IntakePowerCell;
 import frc.robot.commands.IntakeSpitOut;
 import frc.robot.commands.RectractIntake;
 import frc.robot.commands.ShooterSequence;
+import frc.robot.commands.ShooterSequence2;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
@@ -67,12 +70,11 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
     m_Compresser.setClosedLoopControl(true);
 
     // Put stuff on Shuffleboard/SmartDashboard
-    chooser.setDefaultOption("Autonomous Straight", new AutonomousStraight(m_driveTrain, m_indexer, m_shooter,m_intake));
+    chooser.setDefaultOption("Auto6BallHold", new Auto6BallHold(m_driveTrain, m_indexer, m_shooter,m_intake));
    chooser.addOption("3ball Auto", new AutoShoot(m_shooter, m_indexer));
    
    chooser.addOption("Auto6BallShoot", new Auto6BallShoot(m_driveTrain, m_indexer, m_shooter, m_intake));
-   chooser.addOption("AutoShootPickUp", new AutoShootPickup(m_driveTrain, m_indexer, m_shooter, m_intake));
-
+    chooser.addOption(" Auto3ballsback", new Auto3ballsback(m_shooter, m_indexer, m_driveTrain));
     //chooser.addOption("Auto 2", new ...);
     SmartDashboard.putData("Auto mode", chooser);
 
@@ -115,6 +117,12 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
     flywheel.whileHeld(new ShooterSequence(m_shooter, m_indexer));
     flywheel.whenReleased(new InstantCommand(m_shooter::stopShot, m_shooter));
 
+    // Force shoot storage
+    final JoystickButton ForceShoot = new JoystickButton(m_driverCtrl,C.OI.kY);
+    ForceShoot.whenPressed(new ShooterSequence2(m_shooter, m_indexer));
+    ForceShoot.whenReleased(new InstantCommand(m_shooter::stopShot, m_shooter));
+    ForceShoot.whenReleased(new InstantCommand(m_indexer::stopIndex, m_indexer));
+       
    //CODRIVER
 
     final JoystickButton LimeLightLed = new JoystickButton(m_codriverCtrl, C.OI.kX);
@@ -138,6 +146,7 @@ private SendableChooser<Command> chooser = new SendableChooser<>();
     ExtendControl.whenPressed(new ExtendOut(m_Climber));
     ExtendControl.whenReleased(new ExtendRectract(m_Climber));
 
+ 
     }
   
 

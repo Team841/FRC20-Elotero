@@ -14,21 +14,14 @@ import frc.robot.subsystems.Shooter;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class AutoShoot extends SequentialCommandGroup {
+public class ShooterSequence2 extends SequentialCommandGroup {
   /**
-   * Creates a new AutoShoot.
+   * Creates a new ShooterSequence.
    */
-  public AutoShoot(Shooter m_Shooter,Indexer m_Indexer) {
+  public ShooterSequence2(Shooter m_Shooter,Indexer m_Indexer) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new Shoot(m_Shooter).withTimeout(.6), 
-    new ForceIndex(m_Indexer).withTimeout(.5),
-    new StopIndex(m_Indexer).withTimeout(.1),
-    new ForceIndex(m_Indexer).withTimeout(.5),
-    new StopIndex(m_Indexer).withTimeout(.1),
-    new ForceIndex(m_Indexer).withTimeout(.4));
-    //new StopIndex(m_Indexer).withTimeout(.05));
-    //new StopShoot(m_Shooter).withTimeout(.01));
-
+    super(new Shoot(m_Shooter).withTimeout(.5), 
+    new ForceIndex(m_Indexer));
   }
 }

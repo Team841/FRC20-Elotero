@@ -14,64 +14,60 @@ import frc.robot.C;
 // NOTE:  Consider using this command inline rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class AutonomousStraight extends SequentialCommandGroup {
+public class Auto6BallHold extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousStraight.
    */
 
-  public AutonomousStraight(final DriveTrain m_DriveTrain, final Indexer m_Indexer, final Shooter m_Shooter, Intake m_Intake) {
+  public Auto6BallHold(final DriveTrain m_DriveTrain, final Indexer m_Indexer, final Shooter m_Shooter, Intake m_Intake) {
    // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
     super(new PrintCommand("back auto started"),
   
+    // Auto aim at goal
+   //new AutoAim(m_DriveTrain),
+   //new PrintCommand("Aim Goal"),
+
     // 3 ball auto starts here
     new AutoShoot(m_Shooter, m_Indexer),
     new PrintCommand("Three balls shot"),
 
-    //Stop the shot (it has to be called as a command)
-    new StopShoot(m_Shooter).withTimeout(.05),
-    new PrintCommand("Shooter Stop, Drive back start."),
-    
     //Turn right 160
     new TurnRight((m_DriveTrain),.3).withTimeout(.6),
     new PrintCommand("Turned Right 160."),
 
-    // Drive straight
-    new SetDriveStraightPower((m_DriveTrain),.3).withTimeout(1.85),
-    new PrintCommand("Drove Straight"),
-
-    // Turn right 180
-    new TurnRight((m_DriveTrain),.3).withTimeout(.2),
-    new PrintCommand("TurnRight slight"),
-
-    // Intake down
+     // Intake down
     new IntakeOut((m_Intake), true).withTimeout(.05),
-    // Intake Roller on
+     // Intake Roller on
     new RollerOn((m_Intake), true).withTimeout(.05),
 
+    // Drive straight
+    new SetDriveStraightPower((m_DriveTrain),.25).withTimeout(1.75),
+    new PrintCommand("Drove Straight"),
+
+    // Turn right 20
+    new TurnRight((m_DriveTrain),.4).withTimeout(.35),
+    new PrintCommand("TurnRight slight"),
 
     //Drive Straight
-    new SetDriveStraightPower((m_DriveTrain), .3).withTimeout(2.33),
+    new SetDriveStraightPower((m_DriveTrain), .3).withTimeout(2.5),
     new PrintCommand("Drive Straight"),
     new WaitCommand(.5),
 
     //Intake up
     new IntakeOut((m_Intake), false).withTimeout(.05),
-    // ROller off
+
+    // Roller off
     new RollerOff((m_Intake), true).withTimeout(.05),
 
     //Drive backwards
-    new SetDriveStraightPower((m_DriveTrain),-.3).withTimeout(1.8),
-    new PrintCommand("stopped driving in auto"), 
+    new SetDriveStraightPower((m_DriveTrain),-.3).withTimeout(2),
+    new PrintCommand("Stopped driving in auto"), 
     
     //Turn Right 180
-    new TurnRight((m_DriveTrain),.3).withTimeout(.53),
+    new TurnRight((m_DriveTrain),.3).withTimeout(.65),
     new PrintCommand("Turn Right."),
 
-    //*Optional code// Turn
-
-
-    //Wait 20 seconds
     new WaitCommand(20));
     System.out.println("created AutonomousStraight");
     
